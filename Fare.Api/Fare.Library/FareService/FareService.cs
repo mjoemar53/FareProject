@@ -43,6 +43,17 @@ namespace Fare.Library.FareService
                     };
                 }
 
+                if (card.ValidUntil == null)
+                {
+                    return new ServiceResult<string>
+                    {
+                        IsSuccessful = false,
+                        ErrorMessage = "Unable to find card info.",
+                        StatusCode = (int)HttpStatusCode.BadRequest
+                    };
+                }
+
+
                 // Validate Entry Line
                 if (card.LastLine != lineId)
                 {

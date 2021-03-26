@@ -6,7 +6,16 @@ namespace Fare.Library.Models
     public class Card : BaseEntity
     {
         public decimal Load { get; set; }
-        public DateTime? LastUsed { get; set; }
+        private DateTime? _lastUsed;
+        public DateTime? LastUsed 
+        { 
+            get { return _lastUsed; }
+            set
+            {
+                _lastUsed = value;
+                ValidUntil = value.Value.AddYears(5);
+            }
+        }
         public DateTime ValidUntil { get; set; }
         public bool Discounted { get; set; }
         public string RegisteredId { get; set; }
@@ -17,7 +26,6 @@ namespace Fare.Library.Models
         {
             Load = 100;
             LastUsed = DateTime.UtcNow;
-            ValidUntil = DateTime.UtcNow.AddYears(5);
             Discounted = false;
             RegisteredId = string.Empty;
             CompletedTransactions = new List<Transaction>();
