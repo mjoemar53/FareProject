@@ -1,0 +1,8 @@
+{
+  "lookup": [
+    {
+      "discount": "0.20",
+      "compoundDiscount": "0.04"
+    }
+  ]
+}
