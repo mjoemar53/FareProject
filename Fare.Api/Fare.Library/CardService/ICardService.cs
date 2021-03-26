@@ -8,6 +8,6 @@ namespace Fare.Library.CardService
     public interface ICardService
     {
         ServiceResult<string> CreateNew();
-        ServiceResult<string> CreateNew(RequestBody requestBody);
+        ServiceResult<string> CreateNew(CreateCardRequest requestBody);
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Fare.Library.CardService
 {
-    public class RequestBody
+    public class CreateCardRequest
     {
         public string RegisteredId { get; set; }
     }

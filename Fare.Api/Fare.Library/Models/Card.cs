@@ -10,7 +10,9 @@ namespace Fare.Library.Models
         public DateTime ValidUntil { get; set; }
         public bool Discounted { get; set; }
         public string RegisteredId { get; set; }
-        public List<Transaction> Transactions { get; set; }
+        public List<Transaction> CompletedTransactions { get; set; }
+        public int? LastLine { get; set; }
+        public int? LastStation { get; set; }
         public Card()
         {
             Load = 100;
@@ -18,12 +20,20 @@ namespace Fare.Library.Models
             ValidUntil = DateTime.UtcNow.AddYears(5);
             Discounted = false;
             RegisteredId = string.Empty;
-            Transactions = new List<Transaction>();
+            CompletedTransactions = new List<Transaction>();
         }
     }
 
     public class Transaction
     {
         public DateTime TransactionDate { get; set; }
+        public int? Line { get; set; }
+        public int? Entry { get; set; }
+        public int? Exit { get; set; }
+
+        public Transaction()
+        {
+            TransactionDate = DateTime.UtcNow;
+        }
     }
 }

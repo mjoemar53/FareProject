@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30309.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fare.Api", "Fare.Api\Fare.Api.csproj", "{F2718B78-EC6A-4256-8693-576149A88799}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fare.Api", "Fare.Api\Fare.Api.csproj", "{F2718B78-EC6A-4256-8693-576149A88799}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fare.Library", "Fare.Library\Fare.Library.csproj", "{8521F239-24EE-4326-B596-47D4B02FDD89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fare.Library", "Fare.Library\Fare.Library.csproj", "{8521F239-24EE-4326-B596-47D4B02FDD89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

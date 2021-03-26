@@ -4,5 +4,178 @@
       "discount": "0.20",
       "compoundDiscount": "0.04"
     }
+  ],
+  "line": [
+    {
+      "id": 1,
+      "route": "MRT-Line-1",
+      "baseFare": "11",
+      "excessCharge": "1",
+      "stations": [
+        {
+          "id": 1,
+          "name": "Baclaran",
+          "distance": 0
+        },
+        {
+          "id": 2,
+          "name": "Edsa",
+          "distance": 1
+        },
+        {
+          "id": 3,
+          "name": "Libertad",
+          "distance": 2
+        },
+        {
+          "id": 4,
+          "name": "Gil Puyat",
+          "distance": 2
+        },
+        {
+          "id": 5,
+          "name": "P. Cruz",
+          "distance": 3
+        },
+        {
+          "id": 6,
+          "name": "Quirino",
+          "distance": 4
+        },
+        {
+          "id": 7,
+          "name": "P. Gil",
+          "distance": 5
+        },
+        {
+          "id": 8,
+          "name": "United Nations",
+          "distance": 6
+        },
+        {
+          "id": 9,
+          "name": "C. Terminal",
+          "distance": 7
+        },
+        {
+          "id": 10,
+          "name": "Carriedo",
+          "distance": 8
+        },
+        {
+          "id": 11,
+          "name": "D. Jose",
+          "distance": 8
+        },
+        {
+          "id": 12,
+          "name": "Bambang",
+          "distance": 9
+        },
+        {
+          "id": 13,
+          "name": "Tayuman",
+          "distance": 10
+        },
+        {
+          "id": 14,
+          "name": "Blumentrit",
+          "distance": 10
+        },
+        {
+          "id": 15,
+          "name": "A. Santos",
+          "distance": 11
+        },
+        {
+          "id": 16,
+          "name": "R. Papa",
+          "distance": 12
+        },
+        {
+          "id": 17,
+          "name": "5th Ave.",
+          "distance": 13
+        },
+        {
+          "id": 18,
+          "name": "Monumento",
+          "distance": 14
+        },
+        {
+          "id": 19,
+          "name": "Balintawak",
+          "distance": 16
+        },
+        {
+          "id": 20,
+          "name": "Roosevelt",
+          "distance": 18
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "route": "MRT-Line-2",
+      "baseFare": "11",
+      "excessCharge": "1",
+      "stations": [
+        {
+          "id": 1,
+          "name": "Recto",
+          "distance": 0
+        },
+        {
+          "id": 2,
+          "name": "Legarda",
+          "distance": 1
+        },
+        {
+          "id": 3,
+          "name": "Pureza",
+          "distance": 3
+        },
+        {
+          "id": 4,
+          "name": "V. Mapa",
+          "distance": 4
+        },
+        {
+          "id": 5,
+          "name": "J. Ruiz",
+          "distance": 5
+        },
+        {
+          "id": 6,
+          "name": "Gilmore",
+          "distance": 6
+        },
+        {
+          "id": 7,
+          "name": "Betty-Go",
+          "distance": 7
+        },
+        {
+          "id": 8,
+          "name": "Cubao",
+          "distance": 8
+        },
+        {
+          "id": 9,
+          "name": "Anonas",
+          "distance": 10
+        },
+        {
+          "id": 10,
+          "name": "Katipunan",
+          "distance": 11
+        },
+        {
+          "id": 11,
+          "name": "Santolan",
+          "distance": 13
+        }
+      ]
+    }
   ]
 }

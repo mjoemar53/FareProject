@@ -44,7 +44,7 @@ namespace Fare.Library.CardService
             
         }
 
-        public ServiceResult<string> CreateNew(RequestBody requestBody)
+        public ServiceResult<string> CreateNew(CreateCardRequest requestBody)
         {
             Card newCard = new Card();
             string registeredId = requestBody.RegisteredId;

@@ -6,7 +6,7 @@ namespace Fare.Library.Models
 {
     public class Lookup
     {
-        public double Discount { get; set; }
-        public double CompountDiscount { get; set; }
+        public decimal Discount { get; set; }
+        public decimal CompoundDiscount { get; set; }
     }
 }

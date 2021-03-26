@@ -28,7 +28,7 @@ namespace Fare.Api.CardFunction
             if (serviceResult.IsSuccessful)
             {
                 return new OkObjectResult(serviceResult.Result);
-            } 
+            }
             else
             {
                 log.LogInformation(serviceResult.ErrorMessage);
@@ -39,7 +39,7 @@ namespace Fare.Api.CardFunction
 
         [FunctionName("CreateNewRegisteredCard")]
         public async Task<IActionResult> CreateNewRegisteredCard(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] RequestBody body, HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] CreateCardRequest body, HttpRequest req,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
