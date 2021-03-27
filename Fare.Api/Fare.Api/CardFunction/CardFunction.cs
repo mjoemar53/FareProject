@@ -27,7 +27,7 @@ namespace Fare.Api.CardFunction
             var serviceResult = _cardService.CreateNew();
             if (serviceResult.IsSuccessful)
             {
-                return new OkObjectResult(serviceResult.Result);
+                return new OkObjectResult(new { Message = serviceResult.Result });
             }
             else
             {
@@ -35,11 +35,11 @@ namespace Fare.Api.CardFunction
                 log.LogError(serviceResult.ErrorTrace);
                 if (serviceResult.StatusCode == (int)HttpStatusCode.InternalServerError)
                 {
-                    return new BadRequestObjectResult("Unable to process. Try again later.");
+                    return new BadRequestObjectResult(new { ErrorMessage = "Unable to process. Try again later." });
                 }
                 else
                 {
-                    return new BadRequestObjectResult(serviceResult.ErrorMessage);
+                    return new BadRequestObjectResult(new { ErrorMessage = serviceResult.ErrorMessage });
                 }
             }
         }
@@ -53,19 +53,45 @@ namespace Fare.Api.CardFunction
             var serviceResult = _cardService.CreateNew(body);
             if (serviceResult.IsSuccessful)
             {
+                return new OkObjectResult(new { Message = serviceResult.Result });
+            }
+            else
+            {
+                log.LogInformation(serviceResult.ErrorMessage);
+                log.LogError(serviceResult.ErrorTrace);
+                if (serviceResult.StatusCode == (int)HttpStatusCode.InternalServerError)
+                {
+                    return new BadRequestObjectResult(new { ErrorMessage = "Unable to process. Try again later." });
+                }
+                else
+                {
+                    return new BadRequestObjectResult(new { ErrorMessage = serviceResult.ErrorMessage });
+                }
+            }
+        }
+
+        [FunctionName("TopUp")]
+        public async Task<IActionResult> TopUp(
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] TopUpRequest body, HttpRequest req,
+            ILogger log)
+        {
+            log.LogInformation("C# HTTP trigger function processed a request.");
+            var serviceResult = _cardService.TopUp(body);
+            if (serviceResult.IsSuccessful)
+            {
                 return new OkObjectResult(serviceResult.Result);
             }
             else
             {
                 log.LogInformation(serviceResult.ErrorMessage);
                 log.LogError(serviceResult.ErrorTrace);
-                if(serviceResult.StatusCode == (int)HttpStatusCode.InternalServerError)
+                if (serviceResult.StatusCode == (int)HttpStatusCode.InternalServerError)
                 {
-                    return new BadRequestObjectResult("Unable to process. Try again later.");
+                    return new BadRequestObjectResult(new { ErrorMessage = "Unable to process. Try again later." });
                 }
-                else 
+                else
                 {
-                    return new BadRequestObjectResult(serviceResult.ErrorMessage);
+                    return new BadRequestObjectResult(new { ErrorMessage = serviceResult.ErrorMessage });
                 }
             }
         }

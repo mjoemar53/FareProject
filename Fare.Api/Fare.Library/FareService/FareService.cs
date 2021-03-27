@@ -67,7 +67,7 @@ namespace Fare.Library.FareService
                     };
                 }
 
-                // Card Valitidy
+                // Card Validity
                 if (DateTime.UtcNow.Year > card.ValidUntil.Year)
                 {
                     return new ServiceResult<string>
@@ -172,10 +172,6 @@ namespace Fare.Library.FareService
                 };
             }
         }
-
-        public ServiceResult<string> TopUp(string cardId, double amount, double change)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

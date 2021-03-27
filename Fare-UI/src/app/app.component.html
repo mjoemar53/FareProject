@@ -1,13 +1,26 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" [routerLinkActive]="['active']" routerLink="/">Home</a>
+      <a class="nav-item nav-link" [routerLinkActive]="['active']" routerLink="/CashIn">Cash In</a>
+    </div>
+  </div>
+</nav>
+
 <div id="appContainer" class="container-fluid">
 
   <div class="jumbotron">
     <div class="container">
       <h1 class="display-4">Q-LESS Transport</h1>
       <p class="lead">Quick Line and Efficient Service System</p>
-      <app-main></app-main>
+      <hr class="my-4">
+      <router-outlet></router-outlet>
     </div>
   </div>
 
 </div>
 
-<router-outlet></router-outlet>
+

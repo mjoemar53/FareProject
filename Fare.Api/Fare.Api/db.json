@@ -3,7 +3,9 @@
     {
       "discount": "0.20",
       "compoundDiscount": "0.04",
-      "maxDailyDiscountCounter":  "4"
+      "MinAllowedTopUp": "100.00",
+      "MaxAllowedTopUp": "10000.00",
+      "maxDailyDiscountCounter": "4"
     }
   ],
   "line": [

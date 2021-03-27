@@ -1,0 +1,48 @@
+<form [formGroup]="cashInForm" (ngSubmit)="onSubmit()">
+    <div class="form-group has=warning">
+        <label for="CardId">Card Id</label>
+        <span class="text-danger" *ngIf="cashInForm.controls['cardId'].errors && cashInForm.controls['cardId'].hasError('required')"> *</span>
+        <input type="text" class="form-control" id="CardId" aria-describedby="CardId"
+            placeholder="Scan/Enter card Id" formControlName="cardId">
+        <div *ngIf="cashInForm.controls['cardId'].invalid && (cashInForm.controls['cardId'].dirty || cashInForm.controls['cardId'].touched)">
+            <small class="text-danger" *ngIf="cashInForm.controls['cardId'].hasError('required')">
+                This field is required.
+            </small>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Amount">Amount</label>
+        <span class="text-danger" *ngIf="cashInForm.controls['amount'].errors && cashInForm.controls['amount'].hasError('required')"> *</span>
+        <input type="number" class="form-control" id="Amount" placeholder="Amount to cash in" formControlName="amount">
+        <div *ngIf="cashInForm.controls['amount'].invalid && (cashInForm.controls['amount'].dirty || cashInForm.controls['amount'].touched)">
+            <small class="text-danger" *ngIf="cashInForm.controls['amount'].hasError('required')">
+                This field is required.
+            </small>
+            <small class="text-danger" *ngIf="cashInForm.controls['amount'].hasError('min')">
+                Minimum amount is 100.
+            </small>
+            <small class="text-danger" *ngIf="cashInForm.controls['amount'].hasError('max')">
+                Maximum amount is 10000.
+            </small>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Cash">Cash Amount</label>
+        <span class="text-danger" *ngIf="cashInForm.controls['cashAmount'].errors && cashInForm.controls['cashAmount'].hasError('required')"> *</span>
+        <input type="number" class="form-control" id="Cash" placeholder="Amount of cash" formControlName="cashAmount">
+        <div *ngIf="cashInForm.controls['cashAmount'].invalid && (cashInForm.controls['cashAmount'].dirty || cashInForm.controls['cashAmount'].touched)">
+            <small class="text-danger" *ngIf="cashInForm.controls['cashAmount'].hasError('required')">
+                This field is required.
+            </small>
+        </div>
+        <div *ngIf="cashInForm.invalid && (cashInForm.dirty || cashInForm.touched)">
+            <small class="text-danger" *ngIf="cashInForm.hasError('invalidAmounts')">
+                {{ cashInForm.errors!.invalidAmounts.message }}
+            </small>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!cashInForm.valid">Submit</button>
+</form>
+<div id="alertBlock" *ngIf="alertVisiblity" class="alert" [ngClass]="{'alert-primary': alertState === 0,'alert-success': alertState === 1, 'alert-danger': alertState === 2, 'alert-warning': alertState === 3}" role="alert">
+    {{alertMessage}}
+</div>  

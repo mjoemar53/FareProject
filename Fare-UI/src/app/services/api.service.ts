@@ -19,4 +19,14 @@ export class ApiService {
     }
     return this._http.post(this.endpoint, body);
   }
+
+  public topUp(cardId: string, amount: number, cashAmount: number): Observable<any> {
+    this.endpoint = environment.api.topUp;
+    let body = {
+      cardId: cardId,
+      amount: amount,
+      cashAmount: cashAmount
+    }
+    return this._http.post(this.endpoint, body);
+  }
 }
