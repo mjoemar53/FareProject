@@ -83,7 +83,81 @@ namespace Fare.Library.CardService
                     StatusCode = (int)HttpStatusCode.InternalServerError
                 };
             }
-            
+
+        }
+
+        public ServiceResult<string> Register(RegisterCardRequest requestBody)
+        {
+            string cardId = requestBody.CardId;
+            string registeredId = requestBody.RegisteredId;
+            try
+            {
+                Card card = cardCollection.AsQueryable().Where(c => c.Id == cardId).FirstOrDefault();
+                // Validate Card
+                if (card == null)
+                {
+                    return new ServiceResult<string>
+                    {
+                        IsSuccessful = false,
+                        ErrorMessage = "Unable to find card info.",
+                        StatusCode = (int)HttpStatusCode.BadRequest
+                    };
+                }
+
+                // Register Card Once
+                if (!string.IsNullOrEmpty(card.RegisteredId))
+                {
+                    return new ServiceResult<string>
+                    {
+                        IsSuccessful = false,
+                        ErrorMessage = "Card can only be registered once.",
+                        StatusCode = (int)HttpStatusCode.Forbidden
+                    };
+                }
+
+                // Validate if Card was purchased within 6months 
+                if (DateTime.UtcNow.AddMonths(-6).Date > card.DatePurchased.Date)
+                {
+                    return new ServiceResult<string>
+                    {
+                        IsSuccessful = false,
+                        ErrorMessage = " Card can be registered within 6 months upon purchase.",
+                        StatusCode = (int)HttpStatusCode.Forbidden
+                    };
+                }
+
+                card.Discounted = true;
+                card.RegisteredId = registeredId;
+
+                bool updateResult = cardCollection.UpdateOne(card.Id, card);
+                if (!updateResult)
+                {
+                    return new ServiceResult<string>
+                    {
+                        IsSuccessful = false,
+                        ErrorMessage = $"Failed to update card {card.Id}",
+                        StatusCode = (int)HttpStatusCode.NotFound
+                    };
+                }
+
+                return new ServiceResult<string>
+                {
+                    IsSuccessful = true,
+                    Result = $"Card is successfully registered.",
+                    StatusCode = (int)HttpStatusCode.OK
+                };
+
+            }
+            catch (Exception ex)
+            {
+                return new ServiceResult<string>
+                {
+                    IsSuccessful = false,
+                    ErrorMessage = ex.Message,
+                    ErrorTrace = ex.StackTrace,
+                    StatusCode = (int)HttpStatusCode.InternalServerError
+                };
+            }
         }
 
         public ServiceResult<TopUpResult> TopUp(TopUpRequest requestBody)

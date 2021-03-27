@@ -8,6 +8,12 @@ namespace Fare.Library.CardService
         public string RegisteredId { get; set; }
     }
 
+    public class RegisterCardRequest : CreateCardRequest
+    {
+        [JsonProperty("cardId")]
+        public string CardId { get; set; }
+    }
+
     public class TopUpRequest
     {
         [JsonProperty("cardId")]

@@ -1,20 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { throwError} from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services';
 
-function amountChecker(c: AbstractControl) {
-  return c.get('amount')!.value > c.get('cashAmount')!.value ? { 'invalidAmounts': {message: "The Amount cannot be greater than the Cash Amount"} } : null;
-}
-
 @Component({
-  selector: 'app-cashin',
-  templateUrl: './cashin.component.html',
-  styleUrls: ['./cashin.component.less']
+  selector: 'app-management',
+  templateUrl: './management.component.html',
+  styleUrls: ['./management.component.less']
 })
-export class CashinComponent implements OnInit {
-  cashInForm: FormGroup;
+export class ManagementComponent implements OnInit {
+  registerForm: FormGroup;
 
   //1: Success 2: Error 3: Warning
   alertState: number = 0;
@@ -22,11 +18,10 @@ export class CashinComponent implements OnInit {
   @Input() alertMessage: string = '';
 
   constructor(private formBuilder: FormBuilder, private apiService: ApiService) { 
-    this.cashInForm = formBuilder.group({
+    this.registerForm = formBuilder.group({
       cardId: ['', { validators: [Validators.required] }],
-      amount: ['', { validators: [Validators.required, Validators.min(100), Validators.max(10000)] }],
-      cashAmount: ['', {validators: [Validators.required] }]
-    }, { validators: amountChecker });
+      registeredId: ['', {validators: [Validators.required, Validators.pattern('^(.{2,4})-(.{4})-(.{4})')] }]
+    });
   }
 
   ngOnInit(): void {
@@ -34,8 +29,8 @@ export class CashinComponent implements OnInit {
 
   onSubmit() {
     this.alertVisiblity = false;
-    const result = Object.assign({},this.cashInForm.value);
-    this.apiService.topUp(result.cardId, result.amount, result.cashAmount)
+    const result = Object.assign({},this.registerForm.value);
+    this.apiService.registerCard(result.cardId, result.registeredId)
     .pipe(
       catchError(err => {
         if(!!err.error.errorMessage) {
@@ -49,7 +44,7 @@ export class CashinComponent implements OnInit {
     .subscribe(
       data => {
         this.alertState = 1;
-        this.alertMessage = `New Balance: ${data.newBalance} - Change: ${data.change}`
+        this.alertMessage = data.message;
         this.alertVisiblity = true;
         setTimeout(() => {
           this.resetForm();
@@ -66,6 +61,7 @@ export class CashinComponent implements OnInit {
   private resetForm(): void {
     this.alertVisiblity = false;
     this.alertState = 0;
-    this.cashInForm.reset();
+    this.registerForm.reset();
   }
+
 }

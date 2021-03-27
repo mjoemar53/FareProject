@@ -9,6 +9,7 @@ export const environment = {
   api: {
     chargeFare : "http://localhost:7071/api/ChargeFare",
     topUp: "http://localhost:7071/api/TopUp",
+    registerCard: "http://localhost:7071/api/RegisterCard",
     createNewCard: "",
     createNewRegisteredCard: ""
   }

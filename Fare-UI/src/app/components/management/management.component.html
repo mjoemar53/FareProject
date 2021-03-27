@@ -1,0 +1,43 @@
+<h5 class="card-title">Register card for discounts</h5>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="cardId">Card Number</label>
+        <span class="text-danger"
+            *ngIf="registerForm.controls['cardId'].errors && registerForm.controls['cardId'].hasError('required')">
+            *</span>
+        <input type="text" class="form-control" id="cardId" aria-describedby="cardId"
+            placeholder="Scan/Enter card number" formControlName="cardId"
+            [ngClass]="(registerForm.controls['cardId'].invalid && (registerForm.controls['cardId'].dirty || registerForm.controls['cardId'].touched))?'border-danger':''">
+        <div
+            *ngIf="registerForm.controls['cardId'].invalid && (registerForm.controls['cardId'].dirty || registerForm.controls['cardId'].touched)">
+            <small class="text-danger" *ngIf="registerForm.controls['cardId'].hasError('required')">
+                This field is required.
+            </small>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="registeredId">Senior Citizen Control Number or PWD ID Number</label>
+        <span class="text-danger"
+            *ngIf="registerForm.controls['registeredId'].errors && registerForm.controls['registeredId'].hasError('required')">
+            *</span>
+        <input type="text" class="form-control" id="registeredId" aria-describedby="registeredId"
+            placeholder="Enter Senior Citizen Control Number or PWD ID Number" formControlName="registeredId"
+            [ngClass]="registerForm.controls['registeredId'].invalid && (registerForm.controls['registeredId'].dirty || registerForm.controls['registeredId'].touched)?'border-danger':''">
+        <div
+            *ngIf="registerForm.controls['registeredId'].invalid && (registerForm.controls['registeredId'].dirty || registerForm.controls['registeredId'].touched)">
+            <small class="text-danger" *ngIf="registerForm.controls['registeredId'].hasError('required')">
+                This field is required.
+            </small>
+            <small class="text-danger" *ngIf="registerForm.controls['registeredId'].hasError('pattern')">
+                Senior Citizen Control Number must be in ##-####-#### format.
+                PWD ID Number must be in ####-####-#### format.
+            </small>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Submit</button>
+</form>
+<div id="alertBlock" *ngIf="alertVisiblity" class="alert"
+    [ngClass]="{'alert-primary': alertState === 0,'alert-success': alertState === 1, 'alert-danger': alertState === 2, 'alert-warning': alertState === 3}"
+    role="alert">
+    {{alertMessage}}
+</div>

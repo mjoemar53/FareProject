@@ -29,4 +29,13 @@ export class ApiService {
     }
     return this._http.post(this.endpoint, body);
   }
+
+  public registerCard(cardId: string, registeredId: string): Observable<any> {
+    this.endpoint = environment.api.registerCard;
+    let body = {
+      cardId: cardId,
+      registeredId: registeredId
+    }
+    return this._http.post(this.endpoint, body);
+  }
 }

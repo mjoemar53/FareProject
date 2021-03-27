@@ -95,6 +95,32 @@ namespace Fare.Api.CardFunction
                 }
             }
         }
+
+        [FunctionName("RegisterCard")]
+        public async Task<IActionResult> RegisterCard(
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] RegisterCardRequest body, HttpRequest req,
+            ILogger log)
+        {
+            log.LogInformation("C# HTTP trigger function processed a request.");
+            var serviceResult = _cardService.Register(body);
+            if (serviceResult.IsSuccessful)
+            {
+                return new OkObjectResult(new { Message = serviceResult.Result });
+            }
+            else
+            {
+                log.LogInformation(serviceResult.ErrorMessage);
+                log.LogError(serviceResult.ErrorTrace);
+                if (serviceResult.StatusCode == (int)HttpStatusCode.InternalServerError)
+                {
+                    return new BadRequestObjectResult(new { ErrorMessage = "Unable to process. Try again later." });
+                }
+                else
+                {
+                    return new BadRequestObjectResult(new { ErrorMessage = serviceResult.ErrorMessage });
+                }
+            }
+        }
     }
 }
 

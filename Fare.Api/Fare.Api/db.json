@@ -184,25 +184,39 @@
   "card": [
     {
       "load": 100.0,
-      "lastUsed": "2021-03-27T08:51:04.953834Z",
-      "validUntil": "2026-03-27T08:51:04.953834Z",
-      "discounted": true,
-      "registeredId": "1234567890",
-      "completedTransactions": [],
-      "lastLine": 1,
-      "lastStation": 1,
-      "id": "c72c5afb-86fd-4a81-b35d-36ec72c3cdc1"
-    },
-    {
-      "load": 100.0,
-      "lastUsed": "2021-03-27T08:51:04.953834Z",
-      "validUntil": "2026-03-27T08:51:04.953834Z",
+      "datePurchased": "2021-03-27T18:40:09.7214043Z",
+      "lastUsed": "2021-03-27T18:40:09.7216833Z",
+      "validUntil": "2026-03-27T18:40:09.7216833Z",
       "discounted": false,
       "registeredId": "",
       "completedTransactions": [],
-      "lastLine": 1,
-      "lastStation": 1,
-      "id": "cd884999-9f5d-42b4-bbb1-abd4aed650ce"
+      "lastLine": null,
+      "lastStation": null,
+      "id": "aa3ea957-378b-4b0e-bf7c-632f4252d0e3"
+    },
+    {
+      "load": 100.0,
+      "datePurchased": "2021-03-27T18:41:01.9082057Z",
+      "lastUsed": "2021-03-27T18:41:01.9082066Z",
+      "validUntil": "2026-03-27T18:41:01.9082066Z",
+      "discounted": true,
+      "registeredId": "1234567890",
+      "completedTransactions": [],
+      "lastLine": null,
+      "lastStation": null,
+      "id": "aa3ea957-378b-4b0e-bf7c-632f4252d0e4"
+    },
+    {
+      "load": 100.0,
+      "datePurchased": "2020-07-27T20:05:34.1617172Z",
+      "lastUsed": "2021-03-27T20:05:34.1611819Z",
+      "validUntil": "2026-03-27T20:05:34.1611819Z",
+      "discounted": false,
+      "registeredId": "",
+      "completedTransactions": [],
+      "lastLine": null,
+      "lastStation": null,
+      "id": "aa3ea957-378b-4b0e-bf7c-632f4252d0e5"
     }
   ]
 }

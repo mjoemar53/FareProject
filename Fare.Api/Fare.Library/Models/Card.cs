@@ -7,6 +7,7 @@ namespace Fare.Library.Models
     public class Card : BaseEntity
     {
         public decimal Load { get; set; }
+        public DateTime DatePurchased { get; set; }
         private DateTime? _lastUsed;
         public DateTime? LastUsed 
         { 
@@ -26,6 +27,7 @@ namespace Fare.Library.Models
         public Card()
         {
             Load = 100;
+            DatePurchased = DateTime.UtcNow;
             LastUsed = DateTime.UtcNow;
             Discounted = false;
             RegisteredId = string.Empty;

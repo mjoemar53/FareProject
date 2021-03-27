@@ -6,7 +6,7 @@ namespace Fare.Library.CardService
     {
         ServiceResult<string> CreateNew();
         ServiceResult<string> CreateNew(CreateCardRequest requestBody);
-
+        ServiceResult<string> Register(RegisterCardRequest requestBody);
         ServiceResult<TopUpResult> TopUp(TopUpRequest requestBody);
     }
 }

@@ -1,9 +1,13 @@
+<h5 class="card-title">Enter card number</h5>
 <div class="input-group mb-3">
-    <input [(ngModel)]="cardId" (keyup.enter)="chargeCard()" type="text" class="form-control" placeholder="Scan/Enter Card Id" aria-label="Scan/Enter Card Id" aria-describedby="basic-addon2">
-    <div class="input-group-append">
-      <button class="btn btn-outline-secondary" type="button" (click)="chargeCard()">Ok</button>
-    </div>
+  <input [(ngModel)]="cardId" (keyup.enter)="chargeCard()" type="text" class="form-control"
+    placeholder="Scan/Enter Card Id" aria-label="Scan/Enter Card number" aria-describedby="basic-addon2">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="button" (click)="chargeCard()">Ok</button>
+  </div>
 </div>
-<div id="alertBlock" *ngIf="alertVisiblity" class="alert" [ngClass]="{'alert-primary': alertState === 0,'alert-success': alertState === 1, 'alert-danger': alertState === 2, 'alert-warning': alertState === 3}" role="alert">
-    {{alertMessage}}
+<div id="alertBlock" *ngIf="alertVisiblity" class="alert"
+  [ngClass]="{'alert-primary': alertState === 0,'alert-success': alertState === 1, 'alert-danger': alertState === 2, 'alert-warning': alertState === 3}"
+  role="alert">
+  {{alertMessage}}
 </div>
