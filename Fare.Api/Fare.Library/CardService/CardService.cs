@@ -2,9 +2,7 @@
 using Fare.Library.Models;
 using JsonFlatFileDataStore;
 using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Text;
 
 namespace Fare.Library.CardService
 {

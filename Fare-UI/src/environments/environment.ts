@@ -3,7 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  lineId: 1,
+  stationId: 20,
+  api: {
+    chargeFare : "http://localhost:7071/api/ChargeFare",
+    createNewCard: "",
+    createNewRegisteredCard: ""
+  }
 };
 
 /*

@@ -2,10 +2,8 @@
 using Fare.Library.Models;
 using JsonFlatFileDataStore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text;
 
 namespace Fare.Library.FareService
 {
@@ -31,8 +29,10 @@ namespace Fare.Library.FareService
 
             try
             {
-                // Validate Card
                 var card = cardCollection.AsQueryable().Where(c => c.Id == cardId).FirstOrDefault();
+                bool updateResult;
+
+                // Validate Card
                 if (card == null)
                 {
                     return new ServiceResult<string>
@@ -43,12 +43,37 @@ namespace Fare.Library.FareService
                     };
                 }
 
-                if (card.ValidUntil == null)
+                // Lock Card
+                if (card.LastLine == null && card.LastStation == null)
+                {
+                    card.LastLine = lineId;
+                    card.LastStation = stationId;
+                    updateResult = cardCollection.UpdateOne(card.Id, card);
+                    if (!updateResult)
+                    {
+                        return new ServiceResult<string>
+                        {
+                            IsSuccessful = false,
+                            Result = "Unable to lock card.",
+                            StatusCode = (int)HttpStatusCode.BadRequest
+                        };
+                    }
+
+                    return new ServiceResult<string>
+                    {
+                        IsSuccessful = true,
+                        Result = $"Balance: {card.Load}",
+                        StatusCode = (int)HttpStatusCode.Accepted
+                    };
+                }
+
+                // Card Valitidy
+                if (DateTime.UtcNow.Year > card.ValidUntil.Year)
                 {
                     return new ServiceResult<string>
                     {
                         IsSuccessful = false,
-                        ErrorMessage = "Unable to find card info.",
+                        ErrorMessage = "Card is no longer valid.",
                         StatusCode = (int)HttpStatusCode.BadRequest
                     };
                 }
@@ -105,19 +130,28 @@ namespace Fare.Library.FareService
                 // Check for same day transactions
                 int sameDateTransactions = card.CompletedTransactions.Count(trans => trans.TransactionDate.Date == DateTime.UtcNow.Date);
 
-                totalDiscount = sameDateTransactions <= 4 ? totalDiscount + lookup.CompoundDiscount : totalDiscount;
+                totalDiscount = sameDateTransactions < lookup.MaxDailyDiscountCounter ? totalDiscount + lookup.CompoundDiscount : totalDiscount;
 
                 decimal FinalAmount = totalCost - (totalCost * totalDiscount);
                 decimal RemainingBalance = card.Load - FinalAmount;
 
-                // Update 
+                // Update Card
                 card.Load = RemainingBalance;
                 card.CompletedTransactions.Add(new Transaction() { Line = lineId, Entry = card.LastLine, Exit = stationId });
                 card.LastUsed = DateTime.UtcNow;
                 card.LastLine = null;
                 card.LastStation = null;
 
-                cardCollection.UpdateOne(card.Id, card);
+                updateResult = cardCollection.UpdateOne(card.Id, card);
+                if(!updateResult)
+                {
+                    return new ServiceResult<string>
+                    {
+                        IsSuccessful = false,
+                        ErrorMessage = $"Failed to update card {card.Id}",
+                        StatusCode = (int)HttpStatusCode.NotFound
+                    };
+                }
 
                 return new ServiceResult<string>
                 {

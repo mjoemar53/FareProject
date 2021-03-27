@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Fare.Library.Models
+﻿namespace Fare.Library.Models
 {
     public class ServiceResult
     {

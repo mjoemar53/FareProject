@@ -2,7 +2,8 @@
   "lookup": [
     {
       "discount": "0.20",
-      "compoundDiscount": "0.04"
+      "compoundDiscount": "0.04",
+      "maxDailyDiscountCounter":  "4"
     }
   ],
   "line": [
@@ -176,6 +177,30 @@
           "distance": 13
         }
       ]
+    }
+  ],
+  "card": [
+    {
+      "load": 100.0,
+      "lastUsed": "2021-03-27T08:51:04.953834Z",
+      "validUntil": "2026-03-27T08:51:04.953834Z",
+      "discounted": true,
+      "registeredId": "1234567890",
+      "completedTransactions": [],
+      "lastLine": 1,
+      "lastStation": 1,
+      "id": "c72c5afb-86fd-4a81-b35d-36ec72c3cdc1"
+    },
+    {
+      "load": 100.0,
+      "lastUsed": "2021-03-27T08:51:04.953834Z",
+      "validUntil": "2026-03-27T08:51:04.953834Z",
+      "discounted": false,
+      "registeredId": "",
+      "completedTransactions": [],
+      "lastLine": 1,
+      "lastStation": 1,
+      "id": "cd884999-9f5d-42b4-bbb1-abd4aed650ce"
     }
   ]
 }

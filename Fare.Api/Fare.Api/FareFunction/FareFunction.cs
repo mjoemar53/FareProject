@@ -1,12 +1,11 @@
-using System.IO;
-using System.Threading.Tasks;
 using Fare.Library.FareService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace Fare.Api.FareFunction
 {
@@ -28,13 +27,20 @@ namespace Fare.Api.FareFunction
             var serviceResult = _fareService.Charge(body);
             if (serviceResult.IsSuccessful)
             {
-                return new OkObjectResult(serviceResult.Result);
+                return new OkObjectResult(new { Message = serviceResult.Result });
             }
             else
             {
                 log.LogInformation(serviceResult.ErrorMessage);
                 log.LogError(serviceResult.ErrorTrace);
-                return new BadRequestObjectResult("Unable to process. Try again later.");
+                if (serviceResult.StatusCode == (int)HttpStatusCode.InternalServerError)
+                {
+                    return new BadRequestObjectResult(new { ErrorMessage = "Unable to process. Try again later." });
+                }
+                else
+                {
+                    return new BadRequestObjectResult(new { ErrorMessage = serviceResult.ErrorMessage });
+                }
             }
         }
     }

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
-using System;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Fare.Api.CardFunction
@@ -33,7 +33,14 @@ namespace Fare.Api.CardFunction
             {
                 log.LogInformation(serviceResult.ErrorMessage);
                 log.LogError(serviceResult.ErrorTrace);
-                return new BadRequestObjectResult("Unable to process. Try again later.");
+                if (serviceResult.StatusCode == (int)HttpStatusCode.InternalServerError)
+                {
+                    return new BadRequestObjectResult("Unable to process. Try again later.");
+                }
+                else
+                {
+                    return new BadRequestObjectResult(serviceResult.ErrorMessage);
+                }
             }
         }
 
@@ -52,7 +59,14 @@ namespace Fare.Api.CardFunction
             {
                 log.LogInformation(serviceResult.ErrorMessage);
                 log.LogError(serviceResult.ErrorTrace);
-                return new BadRequestObjectResult("Unable to process. Try again later.");
+                if(serviceResult.StatusCode == (int)HttpStatusCode.InternalServerError)
+                {
+                    return new BadRequestObjectResult("Unable to process. Try again later.");
+                }
+                else 
+                {
+                    return new BadRequestObjectResult(serviceResult.ErrorMessage);
+                }
             }
         }
     }
